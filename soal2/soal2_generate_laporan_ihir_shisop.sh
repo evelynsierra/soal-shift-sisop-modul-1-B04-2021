@@ -24,7 +24,7 @@ END{
 printf "\nDaftar nama customer di Albuquerque pada tahun 2017 antara lain:\n"
 for (cust in name) {
    printf "%s\n", cust
-}} ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
+}} ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv >> hasil.txt
 
 #soal2c
 #$8 == segment "consumer" "corporate" "home office"

@@ -1,13 +1,11 @@
 #2a
-
-#Profit Percentage = (Profit Cost Price) 100
+#
 #!/bin/bash
 export LC_ALLL=C
 awk ' 
-
-BEGIN {FS="\t"}
+BEGIN{FS="\t"}
 {
-    ProfitPercentage=$21/($18-$21)*100
+    ProfitPercentage=($21/($18-$21)*100)
 }
 {if (maxPP<=ProfitPercentage){
     maxPP=ProfitPercentage
@@ -15,7 +13,7 @@ BEGIN {FS="\t"}
 }}
 END {
     printf("Transaksi terakhir dengan profit percentage terbesar yaitu %d dengan persentase %d%\n", Row_ID, maxPP)
-} ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
+}' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
 
 #no2b
 export LC_ALL=

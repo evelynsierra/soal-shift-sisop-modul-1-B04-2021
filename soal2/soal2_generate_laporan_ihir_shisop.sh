@@ -12,7 +12,7 @@ BEGIN{FS="\t"}
     RowID=$1
 }}
 END {
-    printf("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%\n", RowID, maxPP)
+    printf("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%%\n", RowID, maxPP)
 }' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
 
 #no2b

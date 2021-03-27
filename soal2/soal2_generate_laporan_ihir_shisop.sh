@@ -11,16 +11,16 @@ BEGIN{FS="\t"}
     max_pp=ProfitPercentage
     RowID=$1
 }}
-END {
-    printf("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%%\n", RowID, max_pp)
-}' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
+END{
+    printf("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%\n", RowID, max_pp)
+} ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
 
 #no2b
 export LC_ALL=
 awk '
 BEGIN {FS="\t"}
 {if ($10=="Albuquerque" && $2~"2017") {name[$7]++}}
-END {
+END{
 printf "\nDaftar nama customer di Albuquerque pada tahun 2017 antara lain:\n"
 for (cust in name) {
    printf "%s\n", cust

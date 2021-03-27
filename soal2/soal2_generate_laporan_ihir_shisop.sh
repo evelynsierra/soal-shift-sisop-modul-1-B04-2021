@@ -5,14 +5,14 @@ export LC_ALLL=C
 awk ' 
 BEGIN{FS="\t"}
 {
-    ProfitPercentage=($21/($18-$21)*100)
+    ProfitPercentage=($21/($18-$21))*100
 }
 {if (maxPP<=ProfitPercentage){
     maxPP=ProfitPercentage
     RowID=$1
 }}
 END {
-    printf("Transaksi terakhir dengan profit percentage terbesar yaitu %d dengan persentase %d%\n", Row_ID, maxPP)
+    printf("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%\n", RowID, maxPP)
 }' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
 
 #no2b

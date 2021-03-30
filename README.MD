@@ -1,4 +1,4 @@
-#**SISOP Modul 1**
+# SISOP Modul 1 #
 
 NRP | NAMA
 ------------- | -------------
@@ -6,12 +6,12 @@ NRP | NAMA
 05111940000059  | Dido Fabian Fayed
 05111940000139  | Zahrotul Adillah
 
-##**SOAL 1**##
+## SOAL 1 ##
 
-##**SOAL 2**##
+## SOAL 2 ##
 
-##**SOAL 3**##
-###3A###
+## SOAL 3 ##
+### 3A ###
 Pada soal diminta untuk mengunduh 23 gambar kucing dari link <https://loremflickr.com/320/240/kitten> dengan syarat tidak ada gambar yang sama
 ```bash
 count=1
@@ -45,7 +45,7 @@ done
 ```
 Pada tiap iterasi akan dicek terlebih dahulu apakah file tersedia menggunakan `-f`, jika iya maka nama file akan diganti sesuai format menggunakan 'rm'.
 
-####3B####
+### 3B ###
 Pada soal ini diminta untuk menjalankan script `soal3a.sh` sehari sekali pada jam 8 malam untuk tanggal-tanggal tertentu setiap bulan, yaitu dari tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...). Supaya lebih rapi, gambar yang telah diunduh beserta log-nya, dipindahkan ke folder dengan nama tanggal unduhnya dengan format "DD-MM-YYYY"
 ```bash
 namafile=$(date +"%d-%m-%Y")
@@ -62,7 +62,7 @@ Script dijalankan dengan crontab berikut
 * 20 2-31/4 * * /bin/bash /home/zahrotuladillah/Documents/Sisop/Modul1/Praktikum/no3/soal3b.sh
 ```
 
-##3C##
+### 3C ###
 Berbeda dengan soal sebelumnya, selain gambar kucing, pada soal ini diminta untuk mengunduh gambar kelinci pada <https://loremflickr.com/320/240/bunny> lalu mengunduhnya gambar kucing dan kelinci secara bergantian.
 ```bash
 count=1
@@ -121,7 +121,7 @@ done
 ```
 Folder kucing dan kelinci dibuat terlebih dahulu menggunakan `mkdir`, lalu iterasi dari 1-23 untuk mengecek apakah gambar tersebut kucing atau kelinci dengan menggunakan cara yang sama dan memindahkannya ke folder yang sesuai.
 
-###3D###
+### 3D ###
 Pada soal ini, folder-folder yang telah dibuat diminta untuk dipindahkan ke zip bernama `Koleksi.zip` dan menguncinya dengan password berupa tanggal saat ini dengan format "MMDDYYYY".
 ```bash
 pass=$(date +"%m%d%Y")
@@ -129,7 +129,7 @@ zip -mqr Koleksi.zip ./Kelinci* ./Kucing* -P $pass
 ```
 Digunakan `mqr` yang dapat dijabarkan `-m` untuk move folder ke zip dan otomatis menghapus folder di OS, `q` yang merupakan quiet berfungsi untuk menyembunyikan pesan saat operasi berlangsung, `-r` untuk zip file-file yang ada dalam direktori/folder secara rekursif, dan `-P` yang berfungsi untuk set password.
 
-###3E###
+### 3E ###
 Pada soal terakhir ini diminta untuk **zip** folder pada jam 7 pagi sampai 6 sore hari senin-jumat, selain itu folder akan di**unzip** tanpa sisa zip file.
 ```bash
 #zip

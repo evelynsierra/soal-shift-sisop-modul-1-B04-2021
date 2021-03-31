@@ -134,7 +134,7 @@ Digunakan `mqr` yang dapat dijabarkan `-m` untuk move folder ke zip dan otomatis
 Pada soal terakhir ini diminta untuk **zip** folder pada jam 7 pagi sampai 6 sore hari senin-jumat, selain itu folder akan di**unzip** tanpa sisa zip file.
 ```bash
 #zip
-0 7 * * 0-5 /bin/bash /home/zahrotuladillah/Documents/Sisop/Modul1/Praktikum/no3/soal3d.sh
+0 7 * * 1-5 /bin/bash /home/zahrotuladillah/Documents/Sisop/Modul1/Praktikum/no3/soal3d.sh
 ```
 Perintah **zip** dijalankan dimulai dari jam 7 pagi pada hari senin-jumat dengan menjalankan script `soal3d` yang berfungsi untuk zip folder. 
 ```bash

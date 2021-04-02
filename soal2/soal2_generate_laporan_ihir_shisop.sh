@@ -12,13 +12,8 @@ BEGIN{FS="\t"}
     RowID=$1
 }}
 END{
-<<<<<<< HEAD
-    printf ("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%%\n", RowID , max_pp)
-}' Laporan-TokoShiSop.tsv > hasil.txt
-=======
     printf("Transaksi terakhir dengan profit persentase terbesar yaitu %d dengan persentase %d%\n", RowID, max_pp)
 } ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
->>>>>>> e846f1723264fe9ce3e22eb216fe7c3fef8219a5
 
 #no2b
 export LC_ALL=
@@ -29,11 +24,8 @@ END{
 printf "\nDaftar nama customer di Albuquerque pada tahun 2017 antara lain:\n"
 for (cust in name) {
    printf "%s\n", cust
-<<<<<<< HEAD
-}} ' Laporan-TokoShiSop.tsv >> hasil.txt
-=======
+
 }} ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv >> hasil.txt
->>>>>>> e846f1723264fe9ce3e22eb216fe7c3fef8219a5
 
 #soal2c
 #$8 == segment "consumer" "corporate" "home office"

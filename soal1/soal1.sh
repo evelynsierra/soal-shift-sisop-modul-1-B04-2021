@@ -21,15 +21,16 @@ done
 
 #soal 1e
 #buat file user_statistic.csv
-echo "Username,INFO,ERROR\n" > "user_statistic.csv"
-#filter dari error, info
-grep -P -o "(ERROR|INFO)(.*)" syslog.log|sort|uniq | while read text
-do
-#dapatkan username,info,error
-username=($(grep -w "(?<=\().*(?=\))" "$text"|sort|uniq))
-info=($(grep -w "(INFO)" "$text"|sort|uniq -c))
-error=($(grep -w "(ERROR)" "$text"|sort|uniq -c))
-done
+file="syslog.log"
+filename="user_statistic.csv"
 
-printf "%s,%d,%d" "$username" "$info" "$error" >> "user_statistic.csv"
+echo Username,INFO,ERROR >> "$filename"
+#* get INFO with the name, then only get string inside parentheses, sort|uniq to count occurence, then iterate
+grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c | while read count username
+do
+    # di grep, pake "" supaya bisa masuk variable, last sed buat hapus whitespace, mengambil 
+    countinfo=`grep -E -o ".* (INFO) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
+    counterror=`grep -E -o ".* (ERROR) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
+    echo $username,$countinfo,$counterror >> "$filename"
+done 
 

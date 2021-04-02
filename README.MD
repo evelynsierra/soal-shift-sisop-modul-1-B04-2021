@@ -31,10 +31,10 @@ do
 	let count=$count+1
 done
 ```
-Variabel 'count' merupakan variabel untuk menandai berapa gambar yang telah diunduh tanpa duplikasi.
+Variabel `count` merupakan variabel untuk menandai berapa gambar yang telah diunduh tanpa duplikasi.
 Jalannya kode diawali oleh perulangan `for` dari 1 sampai 23 lalu menggunakan `wget` untuk mengunduh file, `-a` untuk menyimpan log foto yang telah diunduh ke file `Foto.log`, dan `-O` untuk mengubah nama file.
-Setelah mengunduh gambar, akan dicek dari gambar pertama sampai gambar sebelum sekarang apakah ada duplikasi dengan menggunakan `comm`. Untuk `&>/dev/null` merupakan singkatan untuk `>/dev/null 2>&1` yang berfungsi mengarahkan file deskriptor 2 (STDERR) dan deskriptor 1 (STDOUT) ke `/dev/null` atau dibuang. Setelah dibandingkan, ketika gambar sama, maka gambar yang terbaru akan diremove menggunakan 'rm' dan tentu saja 'count' akan dikurangi. Setiap 'iterasi i', variabel 'count' akan ditambahkan.
-Karena pada soal diminta untuk menggunakan format file 'Koleksi_XX', dilakukan perulangan dari 1-9 seperti di bawah ini
+Setelah mengunduh gambar, akan dicek dari gambar pertama sampai gambar sebelum sekarang apakah ada duplikasi dengan menggunakan `comm`. Untuk `&>/dev/null` merupakan singkatan untuk `>/dev/null 2>&1` yang berfungsi mengarahkan file deskriptor 2 (STDERR) dan deskriptor 1 (STDOUT) ke `/dev/null` atau dibuang. Setelah dibandingkan, ketika gambar sama, maka gambar yang terbaru akan diremove menggunakan `-rm` dan tentu saja `count` akan dikurangi. Setiap `iterasi i`, variabel `count` akan ditambahkan.
+Karena pada soal diminta untuk menggunakan format file `Koleksi_XX`, dilakukan perulangan dari 1-9 seperti di bawah ini
 ```bash
 for ((i=1; i<10; i=i+1))
 do
@@ -44,7 +44,7 @@ do
 	fi
 done
 ```
-Pada tiap iterasi akan dicek terlebih dahulu apakah file tersedia menggunakan `-f`, jika iya maka nama file akan diganti sesuai format menggunakan 'rm'.
+Pada tiap iterasi akan dicek terlebih dahulu apakah file tersedia menggunakan `-f`, jika iya maka nama file akan diganti sesuai format menggunakan `mv`.
 
 ### 3B ###
 Pada soal ini diminta untuk menjalankan script `soal3a.sh` sehari sekali pada jam 8 malam untuk tanggal-tanggal tertentu setiap bulan, yaitu dari tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...). Supaya lebih rapi, gambar yang telah diunduh beserta log-nya, dipindahkan ke folder dengan nama tanggal unduhnya dengan format "DD-MM-YYYY"
@@ -128,7 +128,7 @@ Pada soal ini, folder-folder yang telah dibuat diminta untuk dipindahkan ke zip 
 pass=$(date +"%m%d%Y")
 zip -mqr Koleksi.zip ./Kelinci* ./Kucing* -P $pass
 ```
-Digunakan `mqr` yang dapat dijabarkan `-m` untuk move folder ke zip dan otomatis menghapus folder di OS, `q` yang merupakan quiet berfungsi untuk menyembunyikan pesan saat operasi berlangsung, `-r` untuk zip file-file yang ada dalam direktori/folder secara rekursif, dan `-P` yang berfungsi untuk set password.
+Digunakan `mqr` yang dapat dijabarkan `-m` untuk move folder ke zip dan otomatis menghapus folder di OS, `-q` yang merupakan quiet berfungsi untuk menyembunyikan pesan saat operasi berlangsung, `-r` untuk zip file-file yang ada dalam direktori/folder secara rekursif, dan `-P` yang berfungsi untuk set password.
 
 ### 3E ###
 Pada soal terakhir ini diminta untuk **zip** folder pada jam 7 pagi sampai 6 sore hari senin-jumat, selain itu folder akan di**unzip** tanpa sisa zip file.
@@ -143,3 +143,6 @@ Perintah **zip** dijalankan dimulai dari jam 7 pagi pada hari senin-jumat dengan
 ```
 Perintah **unzip** dijalankan dimulai dari jam 6 sore dengan `unzip` diikuti `rm` untuk menghilangkan zip file.
 
+## Kendala ##
+- Cara menjalankan cron jobs
+- 

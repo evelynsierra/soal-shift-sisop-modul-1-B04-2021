@@ -8,7 +8,55 @@ NRP | NAMA
 05111940000139  | Zahrotul Adillah
 
 ## SOAL 1 ##
+### 1D ###
+Soal 1 diminta untuk membuat 2 laporan yaitu daftar peringkat pesan error (error_message.csv) dan pengguna user (user_statistic.csv). Untuk membuat laporan tersebut maka diperlukan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain : jenis log (ERROR/INFO), pesan log dan username pada tiap baris dan menampilkan semua pesan error yang muncul beserta jumlah kemunculannya. Serta harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap usernya
 
+Untuk mengerjakan poin mendapatkan jenis pesan error serta jumlah kemunculannya, gunakan grep untuk mendapatkan baris yang mengandung kata ERROR, disort dan dihitung kemunculannya
+
+```
+grep -P -o "(?<=ERROR ).*(?=\()" syslog.log |sort|uniq -c|sort -nr
+```
+
+Setelah mendapatkan semua baris yang mengandung kata ERROR, maka dilakukan looping per barisnya dan menulis format yang diinginkan
+```
+grep -P -o "(?<=ERROR ).*(?=\()" syslog.log |sort|uniq -c|sort -nr|while read text
+do
+ ambil_text $text;
+done
+```
+
+Gunakan function ambil_text() untuk mendapatkan angka count yang ada di depannya($1), serta {@:2} menandakan untuk mengambil kalimat setelah spasi pertama
+```
+ambil_text(){
+    result="";
+    for i in "{@:2}"
+    do
+    result="$result $i"
+    done
+    echo "$result,$1" > > "error_message.csv"
+}
+```
+
+Sehingga hasil akhir coding adalah
+```
+ambil_text(){
+    result="";
+    for i in "{@:2}"
+    do
+    result="$result $i"
+    done
+    echo "$result,$1" > > "error_message.csv"
+}
+
+#file error_message.csv
+echo "ERROR,COUNT" > "error_message.csv"
+
+#dapatkan jenis pesan error dan jumlahnya
+grep -P -o "(?<=ERROR ).*(?=\()" syslog.log |sort|uniq -c|sort -nr|while read text
+do
+ ambil_text $text;
+done
+```
 ## SOAL 2 ##
 
 ## SOAL 3 ##

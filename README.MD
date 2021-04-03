@@ -183,6 +183,7 @@ Mirip seperti soal C, soal ini juga mempertimbangkan kondisi `if (1!=NR)` untuk 
 Selanjutnya `region[$13]+=$21` dengan aray `region[&13]` sebagai index dan `$21` merujuk pada kolom `Profit` sebagai valuenya. Syntax ini akan menjumlahkan .
 
 ### 2E ###
+![204598](https://user-images.githubusercontent.com/80528848/113491484-475e5a00-94fb-11eb-9ce9-04438ee6216a.jpg)
 
 
 ## SOAL 3 ##

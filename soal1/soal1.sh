@@ -25,10 +25,11 @@ file="syslog.log"
 filename="user_statistic.csv"
 
 echo Username,INFO,ERROR >> "$filename"
-#* get INFO with the name, then only get string inside parentheses, sort|uniq to count occurence, then iterate
+
+#Mendapatkan total log dari masing-masing username
 grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c | while read count username
-do
-    # di grep, pake "" supaya bisa masuk variable, last sed buat hapus whitespace, mengambil 
+do 
+#dapatkan jumlah INFO dan ERROR dari masing-masing user
     countinfo=`grep -E -o ".* (INFO) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
     counterror=`grep -E -o ".* (ERROR) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
     echo $username,$countinfo,$counterror >> "$filename"

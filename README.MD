@@ -169,7 +169,7 @@ printf "\nTipe segmen customer yang penjualannya paling sedikit adalah %s dengan
 ```
 ### 2D ###
 Pada soal D kita diminta untuk mencari wilayah region yang memiliki jumlah keuntungan paling sedikit. Data yang digunakan pada soal ini adalah data pada kolom `$13` yakni kolom `Region` yang berisi `West`, `East`, `South` dan `Central`.
-Sama seperti soal-soal sebelumnya, soal D ini tetap menggunakan `awk` dnegan `BEGIN` dan `END` sebagai special rule.
+Sama seperti soal-soal sebelumnya, soal D ini tetap menggunakan `awk` dengan `BEGIN` dan `END` sebagai special rule.
 ```bash
 awk '
 BEGIN {FS="\t"}
@@ -180,11 +180,32 @@ BEGIN {FS="\t"}
     }}
 ```
 Mirip seperti soal C, soal ini juga mempertimbangkan kondisi `if (1!=NR)` untuk membaca semua baris kecuali baris pertama (header=bukan data).
-Selanjutnya `region[$13]+=$21` dengan aray `region[&13]` sebagai index dan `$21` merujuk pada kolom `Profit` sebagai valuenya. Syntax ini akan menjumlahkan .
-
+Selanjutnya `region[$13]+=$21` dengan array `region[&13]` sebagai index dan `$21` merujuk pada kolom `Profit` sebagai valuenya. Syntax ini akan menjumlahkan setiap keuntungan pada regionnya.
+```bash
+END{
+    min_prof=999999
+    for(reg in region)
+    {   
+        if(region[reg]<min_prof)
+    {
+        min_prof = region[reg]
+        min_reg = reg
+    }}
+ ```
+ Lalu `min_prof=999999` berfungsi sebagai pembanding yang valuenya harus selalu lebih besar dari setiap region agar nilainya dapat diupdate dan diproses.
+ Pada iterasi `for` akan didapatkan nilai keuntungan terkecil dengan mempertimbangkan setiap keuntungan setiap region pada array `region`. Array `region[reg]` dan index `[reg]` akan disimpan pada variabel `min_prof` dan `min_reg` jika diperoleh jumlah keuntungan regionnya lebih kecil.
+ Selanjutnya hasil pemrosesan data akan di print sesuai dengan ketentuan pada soal.
+ ```bash
+ printf "\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah %s dengan total keuntungan %.2f\n", min_reg, min_prof
+ ```
 ### 2E ###
+Berbeda dengan soal sebelumnya, pada soal E ini kita diminta untuk membuat `file.txt` yang akan digunakan sebagai penyimpanan hasil script output dari pemrosesan soal-soal sebelumnya (2A, 2B, 2C, dan 2D). 
+Direktori dari file Toko ShiSop diarahkan output hasilnya menuju ke `hasil.txt` dengan syntax seperti berikut:
+```bash 
+/Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv > hasil.txt
+``` 
+Didapatkan hasil output pemrosesan data dari soal 2A, 2B, 2C, dan 2D sebagai berikut:
 ![204598](https://user-images.githubusercontent.com/80528848/113491484-475e5a00-94fb-11eb-9ce9-04438ee6216a.jpg)
-
 
 ## SOAL 3 ##
 ### 3A ###
@@ -319,5 +340,7 @@ Perintah **zip** dijalankan dimulai dari jam 7 pagi pada hari senin-jumat dengan
 Perintah **unzip** dijalankan dimulai dari jam 6 sore dengan `unzip` diikuti `rm` untuk menghilangkan zip file.
 
 ## Kendala ##
+- Sempat error hasil output tidak sesuai 
+- Output soal 2A tidak muncul di MacBook 
 - Cara menjalankan cron jobs
 - Cara menggunakan regex yang tepat

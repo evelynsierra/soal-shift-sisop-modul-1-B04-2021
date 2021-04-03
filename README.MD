@@ -8,16 +8,16 @@ NRP | NAMA
 05111940000139  | Zahrotul Adillah
 
 ## SOAL 1 ##
-Soal 1 diminta untuk membuat 2 laporan yaitu daftar peringkat pesan error (error_message.csv) dan pengguna user (user_statistic.csv). Untuk membuat laporan tersebut maka diperlukan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain : jenis log (ERROR/INFO), pesan log dan username pada tiap baris dan menampilkan semua pesan error yang muncul beserta jumlah kemunculannya. Serta harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap usernya
+Soal 1 diminta untuk membuat 2 laporan yaitu daftar peringkat pesan error (error_message.csv) dan pengguna user (user_statistic.csv). Untuk membuat laporan tersebut maka diperlukan informasi dari log aplikasi yang terdapat pada file `syslog.log`. Informasi yang diperlukan antara lain : jenis log (ERROR/INFO), pesan log dan username pada tiap baris dan menampilkan semua pesan error yang muncul beserta jumlah kemunculannya. Serta harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap usernya
 ### 1D ###
 
-Untuk mengerjakan poin mendapatkan jenis pesan error serta jumlah kemunculannya, gunakan grep untuk mendapatkan baris yang mengandung kata ERROR, disort dan dihitung kemunculannya
+Untuk mengerjakan poin mendapatkan jenis pesan error serta jumlah kemunculannya, gunakan grep untuk mendapatkan baris yang mengandung kata `ERROR`, disort dan dihitung kemunculannya
 
 ```
 grep -P -o "(?<=ERROR ).*(?=\()" syslog.log |sort|uniq -c|sort -nr
 ```
 
-Setelah mendapatkan semua baris yang mengandung kata ERROR, maka dilakukan looping per barisnya dan menulis format yang diinginkan
+Setelah mendapatkan semua baris yang mengandung kata `ERROR`, maka dilakukan looping per barisnya dan menulis format yang diinginkan
 ```
 grep -P -o "(?<=ERROR ).*(?=\()" syslog.log |sort|uniq -c|sort -nr|while read text
 do
@@ -25,7 +25,7 @@ do
 done
 ```
 
-Gunakan function ambil_text() untuk mendapatkan angka count yang ada di depannya($1), serta {@:2} menandakan untuk mengambil kalimat setelah spasi pertama
+Gunakan function `ambil_text()` untuk mendapatkan angka count yang ada di depannya($1), serta `{@:2}` menandakan untuk mengambil kalimat setelah spasi pertama
 ```
 ambil_text(){
     result="";
@@ -59,12 +59,12 @@ done
 ```
 
 ### 1E ###
-Pada soal 1e, kita membutuhkan semua informasi yang dapat menampiilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya. Sehingga, langkah pertama yang dilakukan adalah menghitung berapa banyak kemunculan user yang sama dan disort secara ascending
+Pada soal 1e, kita membutuhkan semua informasi yang dapat menampiilkan jumlah kemunculan log `ERROR` dan `INFO` untuk setiap user-nya. Sehingga, langkah pertama yang dilakukan adalah menghitung berapa banyak kemunculan user yang sama dan disort secara ascending
 ```
 grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c 
 ```
 
-Setelah mendapatkan jumlah kemunculan user, maka dari setiap user di loop untuk mendapatkan jumlah log ERROR dan INFO.
+Setelah mendapatkan jumlah kemunculan user, maka dari setiap user di loop untuk mendapatkan jumlah log `ERROR` dan `INFO`.
 ```
 grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c | while read count username
 do
@@ -74,7 +74,7 @@ do
 done 
 ```
 
-Data yang diperoleh akan dimasukkin ke dalam file user_statistic.csv
+Data yang diperoleh akan dimasukkin ke dalam file `user_statistic.csv`
 ```
 file="syslog.log"
 filename="user_statistic.csv"
@@ -225,4 +225,4 @@ Perintah **unzip** dijalankan dimulai dari jam 6 sore dengan `unzip` diikuti `rm
 
 ## Kendala ##
 - Cara menjalankan cron jobs
-- 
+- Cara menggunakan regex yang tepat

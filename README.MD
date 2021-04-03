@@ -8,8 +8,8 @@ NRP | NAMA
 05111940000139  | Zahrotul Adillah
 
 ## SOAL 1 ##
-### 1D ###
 Soal 1 diminta untuk membuat 2 laporan yaitu daftar peringkat pesan error (error_message.csv) dan pengguna user (user_statistic.csv). Untuk membuat laporan tersebut maka diperlukan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain : jenis log (ERROR/INFO), pesan log dan username pada tiap baris dan menampilkan semua pesan error yang muncul beserta jumlah kemunculannya. Serta harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap usernya
+### 1D ###
 
 Untuk mengerjakan poin mendapatkan jenis pesan error serta jumlah kemunculannya, gunakan grep untuk mendapatkan baris yang mengandung kata ERROR, disort dan dihitung kemunculannya
 
@@ -57,6 +57,38 @@ do
  ambil_text $text;
 done
 ```
+
+### 1E ###
+Pada soal 1e, kita membutuhkan semua informasi yang dapat menampiilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya. Sehingga, langkah pertama yang dilakukan adalah menghitung berapa banyak kemunculan user yang sama dan disort secara ascending
+```
+grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c 
+```
+
+Setelah mendapatkan jumlah kemunculan user, maka dari setiap user di loop untuk mendapatkan jumlah log ERROR dan INFO.
+```
+grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c | while read count username
+do
+    countinfo=`grep -E -o ".* (INFO) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
+    counterror=`grep -E -o ".* (ERROR) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
+    echo $username,$countinfo,$counterror >> "$filename"
+done 
+```
+
+Data yang diperoleh akan dimasukkin ke dalam file user_statistic.csv
+```
+file="syslog.log"
+filename="user_statistic.csv"
+
+echo Username,INFO,ERROR >> "$filename"
+
+grep -E -o '.* (\(.*\))' "$file" | sed  's/.*(\(.*\))/\1/' | sort | uniq -c | while read count username
+do
+    countinfo=`grep -E -o ".* (INFO) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
+    counterror=`grep -E -o ".* (ERROR) .* (\($name\))" "$file" | sed  's/.*(\(.*\))/\1/' | wc -l | sed 's/^[ \t]*//'`
+    echo $username,$countinfo,$counterror >> "$filename"
+done 
+```
+
 ## SOAL 2 ##
 
 ## SOAL 3 ##

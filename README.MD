@@ -90,7 +90,7 @@ done
 ```
 
 ## SOAL 2 ##
-Pada soal nomor 2 ini kita diminta untuk mengunduh file dari link <https://drive.google.com/file/d/16GuWWg3tZpzO7lTKmyVF6I9JPFYJQFJ8/view?usp=sharing> terlebih dahulu agar bisa mengerjakan soal ini. Soal no 2 ini menggunakan `awk` dalam pengerjaanya untuk memproses suatu file yang memiliki banyak data.
+Pada soal nomor 2 ini kita diminta untuk mengunduh file dari link <https://drive.google.com/file/d/16GuWWg3tZpzO7lTKmyVF6I9JPFYJQFJ8/view?usp=sharing> terlebih dahulu agar bisa mengerjakan soal ini. Untuk memproses file yang memiliki banyak data seperti soal no 2 ini maka diunakanlah `awk` dalam penyelesaianya.
 ### 2A ###
 Permasalahan pada soal 2A adalah kita diminta untuk menghitung persentase keuntungan terbesar berdasarkan file tsv yang sudah kita unduh sebelumnya.
 ```
@@ -129,6 +129,17 @@ for (cust in name)
    ```
 Pada `END` ini akan melakukan iterasi pada setiap elemen `cust` yang selanjutnya akan di print.
 ### 2C ###
+Selanjutnya, pada soal C ini kita diminta untuk menampilkan tipe segmen customer yang memiliki penjualan paling sedikit.
+```
+export LC_ALL=C
+awk 'BEGIN {FS="\t"}
+{
+    if(1!=NR){
+        seg_cust[$8]+=1
+    }}
+```
+Pada `BEGIN` terdapat kondisi `if(1!=NR)` dimana `1!=NR` untuk membaca setiap baris dengan mengabaikan baris pertama pada tabel di file Toko ShiSop (dianggap bukan data), data akan dibaca mulai baris kedua.
+`$8` memanggil data dari kolom `Segment`. `seg_cust[$8]+=1` 
 
 ## SOAL 3 ##
 ### 3A ###

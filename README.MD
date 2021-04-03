@@ -90,6 +90,45 @@ done
 ```
 
 ## SOAL 2 ##
+Pada soal nomor 2 ini kita diminta untuk mengunduh file dari link <https://drive.google.com/file/d/16GuWWg3tZpzO7lTKmyVF6I9JPFYJQFJ8/view?usp=sharing> terlebih dahulu agar bisa mengerjakan soal ini. Soal no 2 ini menggunakan `awk` dalam pengerjaanya untuk memproses suatu file yang memiliki banyak data.
+### 2A ###
+Permasalahan pada soal 2A adalah kita diminta untuk menghitung persentase keuntungan terbesar berdasarkan file tsv yang sudah kita unduh sebelumnya.
+```
+export LC_ALLL=C
+awk ' 
+BEGIN{FS="\t"}
+```
+`LC_ALL=C` ini digunakan sebagai untuk membaca data yang dengan titik (.) agar terbaca sebagai desimal. Digunakan karena data-data (angka) pada file tsv Toko ShiSop menggunakan titik.
+Variabel `BEGIN` sebagai special rule dalam awk dan `FS="\t"` sebagai file separator dengan menggunakan tab karena sesuai pada format file Toko ShiSop yaitu tsv (Tab Separator Value) yang dipisahkan oleh tab pada setiap datanya.
+```
+{
+    ProfitPercentage=($21/($18-$21))*100 
+}
+```
+Pada section `BEGIN` ini melakukan perhitungan untuk mencari data yang memiliki persentase keuntungan terbesar.
+Untuk mencari persentase keuntungan terbesar, sesuai pada soal maka digunakanlah rumus berikut `ProfitPercentage=($21/($18-$21))*100 `. Yaitu PROFIT PERCENTAGE=PROFIT COST PRICE X100%. Profit Cost Price sendiri didapatkan dari `$18-$21` yaitu data pada kolom Profit dikurangi dengan Penjualan. 
+```
+{if (max_pp<=ProfitPercentage){
+    max_pp=ProfitPercentage
+    RowID=$1
+}}
+```
+Selanjutnya diinisiasi variabel baru yaitu `max_pp` sebagai pembanding. `max_pp<= ProfitPercentage` digunakan untuk membandingkan setiap datanya harus selalu lebih besar dari `max_pp` agar datanya dapat terupdate. `max-pp=ProfitPercentage` adalah syntax untuk menyimpan nilai persentase profit terbesar yang didapatkan setelah perhitungan.
+Pada `END` section digunakan untuk print hasil Persentase Terbesar. `/Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv` merupuakan direktori file Toko ShiSop sebagai input dari soal 2 ini.
+
+### 2B ###
+Pada permasalahan di soal B ini kita diminta untuk menampilkan daftar nama customer yang melakukan transaksi di Albuquerque pada tahun 2017. Sama dengan soal A, pada soal ini tetap menggunakan `awk` dalam memproses data dan `FS="\t"` sebagai file separator. 
+```
+{if ($10=="Albuquerque" && $2~"2017") {name[$7]++}}
+```
+Pada `BEGIN` dilakukan pemrosesan untuk mencari daftar nama yang melakukan transaksi di Albuquerque pada 2017. `$10` mengambil data `City` pada file Toko ShiSop, `$2` adalah kolom `Order ID` yang mengandung tahun transaksi sedangkan `$2` mengambil data pada kolom `Customer Name`.
+`$10=="Albuquerque"`memanggil data `Albuquerque` di kolom `City` dan `$2~"2017"` digunakan untuk mendapatkan data yang mengandung string yang sama yaitu `2017`.
+`name [$7]++` merupakan associative array dimana setiap menemukan data transaksi di kota Albuquerque paa 2017 yang di print adalah indexnya sehingga tidak diprint nama yang sama meskipun melakukan transaksi lebih dari 1 kali.
+```
+for (cust in name)
+   ```
+Pada `END` ini akan melakukan iterasi pada setiap elemen `cust` yang selanjutnya akan di print.
+### 2C ###
 
 ## SOAL 3 ##
 ### 3A ###

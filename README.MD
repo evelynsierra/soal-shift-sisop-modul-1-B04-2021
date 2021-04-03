@@ -115,8 +115,18 @@ Untuk mencari persentase keuntungan terbesar, sesuai pada soal maka digunakanlah
 ```
 Selanjutnya diinisiasi variabel baru yaitu `max_pp` sebagai pembanding. `max_pp<= ProfitPercentage` digunakan untuk membandingkan setiap datanya harus selalu lebih besar dari `max_pp` agar datanya dapat terupdate. `max-pp=ProfitPercentage` adalah syntax untuk menyimpan nilai persentase profit terbesar yang didapatkan setelah perhitungan.
 Pada `END` section digunakan untuk print hasil Persentase Terbesar. `/Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv` merupuakan direktori file Toko ShiSop sebagai input dari soal 2 ini.
-
 ### 2B ###
+```
+export LC_ALL=
+awk '
+BEGIN {FS="\t"}
+{if ($10=="Albuquerque" && $2~"2017") {name[$7]++}}
+END {
+printf "\nDaftar nama customer di Albuquerque pada tahun 2017 antara lain:\n"
+for (cust in name) {
+   printf "%s\n", cust
+}} ' /Users/didofabianfayed/Downloads/Laporan-TokoShiSop.tsv >> hasil.txt
+```
 Pada permasalahan di soal B ini kita diminta untuk menampilkan daftar nama customer yang melakukan transaksi di Albuquerque pada tahun 2017. Sama dengan soal A, pada soal ini tetap menggunakan `awk` dalam memproses data dan `FS="\t"` sebagai file separator. 
 ```
 {if ($10=="Albuquerque" && $2~"2017") {name[$7]++}}
@@ -127,7 +137,7 @@ Pada `BEGIN` dilakukan pemrosesan untuk mencari daftar nama yang melakukan trans
 ```
 for (cust in name)
    ```
-Pada `END` ini akan melakukan iterasi pada setiap elemen `cust` yang selanjutnya akan di print.
+Pada `END` ini akan melakukan iterasi pada setiap elemen `cust` yang selanjutnya akan di print sesuai dengan format ketentuan pada soal.
 ### 2C ###
 Selanjutnya, pada soal C ini kita diminta untuk menampilkan tipe segmen customer yang memiliki penjualan paling sedikit.
 ```
@@ -139,7 +149,41 @@ awk 'BEGIN {FS="\t"}
     }}
 ```
 Pada `BEGIN` terdapat kondisi `if(1!=NR)` dimana `1!=NR` untuk membaca setiap baris dengan mengabaikan baris pertama pada tabel di file Toko ShiSop (dianggap bukan data), data akan dibaca mulai baris kedua.
-`$8` memanggil data dari kolom `Segment`. `seg_cust[$8]+=1` 
+`$8` data dari kolom `Segment` yang berisi `Home Office`, `Corporate` dan `Customer`. Array `seg_cust[$8]` bermaksud sebagai index dan penghitung transaksi sebagai valuenya. 
+```
+END{
+    sales_min=999999
+    for (type in seg_cust){
+        if (seg_cust[type] < sales_min  )
+        {
+            sales_min = seg_cust[type]
+            min_seg = type
+        }}
+```
+Untuk mencari tipe segmen mana yang memiliki penjualan terkecil maka dilakukan lah proses pada section `END` ini. 
+`sales_min=999999` adalah variabel pembanding yang valuenya harus dipastikan tidak lebih kecil dari total penjualan setiap segmenya (`seg_cust[type]< sales_min`).
+Akan melakukan iterasi pada `for` untuk mengecek element pada setiap segment yang selanjutnya akan menyimpan array `seg_cust[type]` dan index `type` pada variabel `sales_min` dan `min_seg`.
+Selanjutnya hasil pemrosesan data akan di print sesuai dengan ketentuan pada soal.
+```
+printf "\nTipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", min_seg, sales_min
+```
+### 2D ###
+Pada soal D kita diminta untuk mencari wilayah region yang memiliki jumlah keuntungan paling sedikit. Data yang digunakan pada soal ini adalah data pada kolom `$13` yakni kolom `Region` yang berisi `West`, `East`, `South` dan `Central`.
+Sama seperti soal-soal sebelumnya, soal D ini tetap menggunakan `awk` dnegan `BEGIN` dan `END` sebagai special rule.
+```
+awk '
+BEGIN {FS="\t"}
+{
+    if (1!=NR)
+    {
+        region[$13]+=$21
+    }}
+```
+Mirip seperti soal C, soal ini juga mempertimbangkan kondisi `if (1!=NR)` untuk membaca semua baris kecuali baris pertama (header=bukan data).
+Selanjutnya `region[$13]+=$21` dengan aray `region[&13]` sebagai index dan `$21` merujuk pada kolom `Profit` sebagai valuenya. Syntax ini akan menjumlahkan .
+
+### 2E ###
+
 
 ## SOAL 3 ##
 ### 3A ###

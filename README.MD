@@ -340,7 +340,8 @@ Perintah **zip** dijalankan dimulai dari jam 7 pagi pada hari senin-jumat dengan
 Perintah **unzip** dijalankan dimulai dari jam 6 sore dengan `unzip` diikuti `rm` untuk menghilangkan zip file.
 
 ## Kendala ##
-- Sempat error hasil output tidak sesuai 
+- Hasil output tidak sesuai perhitungan pada soal no2
 - Output soal 2A tidak muncul di MacBook 
+- Output tidak muncul karena case sensitive 
 - Cara menjalankan cron jobs
 - Cara menggunakan regex yang tepat
